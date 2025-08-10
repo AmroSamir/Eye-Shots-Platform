@@ -120,8 +120,14 @@ const ProjectDetailsSetting = ({
                     render={({ field }) => (
                         <DatePicker
                             {...field}
-                            value={field.value ? dayjs.unix(field.value as number).toDate(): null}
-                            onChange={(date) => field.onChange(dayjs(date).unix())}
+                            value={
+                                field.value
+                                    ? dayjs.unix(field.value as number).toDate()
+                                    : null
+                            }
+                            onChange={(date) =>
+                                field.onChange(dayjs(date).unix())
+                            }
                         />
                     )}
                 />

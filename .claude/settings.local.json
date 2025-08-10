@@ -5,7 +5,13 @@
       "Bash(npm install:*)",
       "Bash(mkdir:*)",
       "Bash(npm audit:*)",
-      "Bash(npm run dev:*)"
+      "Bash(npm run dev:*)",
+      "Bash(npm run lint)",
+      "Bash(npm run prettier:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx convex dev:*)",
+      "Bash(rm:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

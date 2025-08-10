@@ -3,7 +3,7 @@ import Avatar from '@/components/ui/Avatar'
 import Dropdown from '@/components/ui/Dropdown'
 import withHeaderItem from '@/utils/hoc/withHeaderItem'
 import Link from 'next/link'
-import signOut from '@/server/actions/auth/handleSignOut'
+import { useClerk } from '@clerk/nextjs'
 import useCurrentSession from '@/utils/hooks/useCurrentSession'
 import {
     PiUserDuotone,
@@ -40,6 +40,7 @@ const dropdownItemList: DropdownList[] = [
 
 const _UserDropdown = () => {
     const { session } = useCurrentSession()
+    const { signOut } = useClerk()
 
     const handleSignOut = async () => {
         await signOut()

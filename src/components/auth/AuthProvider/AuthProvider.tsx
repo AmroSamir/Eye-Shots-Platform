@@ -1,26 +1,51 @@
 'use client'
 
-import { SessionProvider as NextAuthSessionProvider } from 'next-auth/react'
+import { useUser } from '@clerk/nextjs'
+import { useQuery } from 'convex/react'
+import { api } from '@/../convex/_generated/api'
 import SessionContext from './SessionContext'
-import type { Session as NextAuthSession } from 'next-auth'
-
-type Session = NextAuthSession | null
 
 type AuthProviderProps = {
-    session: Session | null
     children: React.ReactNode
 }
 
 const AuthProvider = (props: AuthProviderProps) => {
-    const { session, children } = props
+    const { children } = props
+    const { user: clerkUser, isSignedIn } = useUser()
+
+    // Get user data from Convex
+    const convexUser = useQuery(
+        api.users.getUserByClerkId,
+        clerkUser?.id ? { clerkId: clerkUser.id } : 'skip',
+    )
+
+    // Create session object that matches the expected format
+    const session =
+        isSignedIn && clerkUser
+            ? {
+                  user: {
+                      id: clerkUser.id,
+                      name:
+                          clerkUser.fullName ||
+                          clerkUser.firstName ||
+                          'Unknown',
+                      email: clerkUser.primaryEmailAddress?.emailAddress || '',
+                      image: clerkUser.imageUrl || '',
+                      authority:
+                          convexUser?.role === 'Admin'
+                              ? ['admin', 'user']
+                              : ['user'],
+                      type: convexUser?.type || 'Client',
+                      role: convexUser?.role || 'Client',
+                  },
+                  expires: '', // Clerk handles expiration internally
+              }
+            : null
 
     return (
-        /** since the next auth useSession hook was triggering mutliple re-renders, hence we are using the our custom session provider and we still included the next auth session provider, incase we need to use any client hooks from next auth */
-        <NextAuthSessionProvider session={session} refetchOnWindowFocus={false}>
-            <SessionContext.Provider value={session}>
-                {children}
-            </SessionContext.Provider>
-        </NextAuthSessionProvider>
+        <SessionContext.Provider value={session}>
+            {children}
+        </SessionContext.Provider>
     )
 }
 

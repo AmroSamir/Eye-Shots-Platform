@@ -40,11 +40,26 @@ export default async function RootLayout({
                         // Theme configuration that automatically adapts to platform light/dark mode
                         variables: {
                             colorPrimary: 'var(--primary)',
-                            colorBackground: theme.mode === 'dark' ? 'var(--gray-800)' : 'var(--gray-50)',
-                            colorInputBackground: theme.mode === 'dark' ? 'var(--gray-700)' : 'var(--gray-100)',
-                            colorText: theme.mode === 'dark' ? 'var(--gray-100)' : 'var(--gray-900)',
-                            colorTextSecondary: theme.mode === 'dark' ? 'var(--gray-300)' : 'var(--gray-500)',
-                            colorNeutral: theme.mode === 'dark' ? 'var(--gray-100)' : 'var(--gray-900)',
+                            colorBackground:
+                                theme.mode === 'dark'
+                                    ? 'var(--gray-800)'
+                                    : 'var(--gray-50)',
+                            colorInputBackground:
+                                theme.mode === 'dark'
+                                    ? 'var(--gray-700)'
+                                    : 'var(--gray-100)',
+                            colorText:
+                                theme.mode === 'dark'
+                                    ? 'var(--gray-100)'
+                                    : 'var(--gray-900)',
+                            colorTextSecondary:
+                                theme.mode === 'dark'
+                                    ? 'var(--gray-300)'
+                                    : 'var(--gray-500)',
+                            colorNeutral:
+                                theme.mode === 'dark'
+                                    ? 'var(--gray-100)'
+                                    : 'var(--gray-900)',
                             borderRadius: '0.5rem',
                             fontFamily: 'inherit',
                         },
@@ -57,29 +72,62 @@ export default async function RootLayout({
                                 },
                             },
                             card: {
-                                backgroundColor: theme.mode === 'dark' ? 'var(--gray-800)' : 'var(--gray-50)',
-                                boxShadow: theme.mode === 'dark' ? '0 4px 6px -1px var(--gray-950)' : '0 4px 6px -1px var(--gray-200)',
+                                backgroundColor:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-800)'
+                                        : 'var(--gray-50)',
+                                boxShadow:
+                                    theme.mode === 'dark'
+                                        ? '0 4px 6px -1px var(--gray-950)'
+                                        : '0 4px 6px -1px var(--gray-200)',
                             },
                             headerTitle: {
-                                color: theme.mode === 'dark' ? 'var(--gray-100)' : 'var(--gray-900)',
+                                color:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-100)'
+                                        : 'var(--gray-900)',
                             },
                             headerSubtitle: {
-                                color: theme.mode === 'dark' ? 'var(--gray-300)' : 'var(--gray-500)',
+                                color:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-300)'
+                                        : 'var(--gray-500)',
                             },
                             formButtonSecondary: {
-                                backgroundColor: theme.mode === 'dark' ? 'var(--gray-700)' : 'var(--gray-200)',
-                                color: theme.mode === 'dark' ? 'var(--gray-100)' : 'var(--gray-900)',
+                                backgroundColor:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-700)'
+                                        : 'var(--gray-200)',
+                                color:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-100)'
+                                        : 'var(--gray-900)',
                                 '&:hover': {
-                                    backgroundColor: theme.mode === 'dark' ? 'var(--gray-600)' : 'var(--gray-300)',
+                                    backgroundColor:
+                                        theme.mode === 'dark'
+                                            ? 'var(--gray-600)'
+                                            : 'var(--gray-300)',
                                 },
                             },
                             input: {
-                                backgroundColor: theme.mode === 'dark' ? 'var(--gray-700)' : 'var(--gray-100)',
-                                color: theme.mode === 'dark' ? 'var(--gray-100)' : 'var(--gray-900)',
-                                borderColor: theme.mode === 'dark' ? 'var(--gray-600)' : 'var(--gray-300)',
+                                backgroundColor:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-700)'
+                                        : 'var(--gray-100)',
+                                color:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-100)'
+                                        : 'var(--gray-900)',
+                                borderColor:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-600)'
+                                        : 'var(--gray-300)',
                             },
                             label: {
-                                color: theme.mode === 'dark' ? 'var(--gray-200)' : 'var(--gray-700)',
+                                color:
+                                    theme.mode === 'dark'
+                                        ? 'var(--gray-200)'
+                                        : 'var(--gray-700)',
                             },
                         },
                     }}
@@ -87,7 +135,9 @@ export default async function RootLayout({
                     <ConvexClientProvider>
                         <LocaleProvider locale={locale} messages={messages}>
                             <ThemeProvider locale={locale} theme={theme}>
-                                <NavigationProvider navigationTree={navigationTree}>
+                                <NavigationProvider
+                                    navigationTree={navigationTree}
+                                >
                                     {children}
                                 </NavigationProvider>
                             </ThemeProvider>

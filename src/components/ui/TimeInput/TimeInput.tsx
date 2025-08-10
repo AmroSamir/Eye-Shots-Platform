@@ -69,7 +69,6 @@ const TimeInput = (props: TimeInputProps) => {
         ...rest
     } = props
 
-
     const hoursRef = useRef<HTMLInputElement>(undefined)
     const minutesRef = useRef<HTMLInputElement>(undefined)
     const secondsRef = useRef<HTMLInputElement>(undefined)

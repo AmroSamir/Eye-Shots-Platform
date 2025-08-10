@@ -161,16 +161,20 @@ const Navigation = ({ toggleMode, mode }: NavigationProps) => {
                         <span className="heading-text">Next</span>
                     </div> */}
                     {isSignedIn ? (
-                        <UserButton 
+                        <UserButton
                             appearance={{
                                 elements: {
-                                    avatarBox: "w-8 h-8"
-                                }
+                                    avatarBox: 'w-8 h-8',
+                                },
                             }}
                         />
                     ) : (
-                        <SignInButton mode="modal" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm">
-                            Sign In
+                        <SignInButton
+                            mode="modal"
+                        >
+                            <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm">
+                                Sign In
+                            </button>
                         </SignInButton>
                     )}
                 </div>

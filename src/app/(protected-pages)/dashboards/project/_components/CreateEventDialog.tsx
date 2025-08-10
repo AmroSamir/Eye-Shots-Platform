@@ -14,7 +14,7 @@ import {
     TbPresentation,
     TbBell,
 } from 'react-icons/tb'
-import { LuTreePalm  } from 'react-icons/lu'
+import { LuTreePalm } from 'react-icons/lu'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'

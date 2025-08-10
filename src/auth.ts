@@ -1,11 +1,18 @@
-import NextAuth from 'next-auth'
-import appConfig from '@/configs/app.config'
-import authConfig from '@/configs/auth.config'
+import { auth } from '@clerk/nextjs/server'
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
-    pages: {
-        signIn: appConfig.authenticatedEntryPath,
-        error: appConfig.authenticatedEntryPath,
-    },
-    ...authConfig,
-})
+// Export Clerk's auth function for server-side authentication checks
+export { auth }
+
+// Helper functions for common auth operations
+export const getAuthUser = async () => {
+    const { userId } = await auth()
+    return userId
+}
+
+export const requireAuth = async () => {
+    const userId = await getAuthUser()
+    if (!userId) {
+        throw new Error('User not authenticated')
+    }
+    return userId
+}

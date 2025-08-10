@@ -1,6 +1,5 @@
-import NextAuth from 'next-auth'
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
-import authConfig from '@/configs/auth.config'
 import {
     authRoutes as _authRoutes,
     publicRoutes as _publicRoutes,
@@ -8,23 +7,19 @@ import {
 import { REDIRECT_URL_KEY } from '@/constants/app.constant'
 import appConfig from '@/configs/app.config'
 
-const { auth } = NextAuth(authConfig)
-
 const publicRoutes = Object.entries(_publicRoutes).map(([key]) => key)
 const authRoutes = Object.entries(_authRoutes).map(([key]) => key)
 
-const apiAuthPrefix = `${appConfig.apiPrefix}/auth`
+// Create route matchers for Clerk
+const isPublicRoute = createRouteMatcher([...publicRoutes, ...authRoutes])
 
-export default auth((req) => {
+export default clerkMiddleware(async (auth, req) => {
     const { nextUrl } = req
-    const isSignedIn = !!req.auth
+    const { userId } = await auth()
+    const isSignedIn = !!userId
 
-    const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix)
-    const isPublicRoute = publicRoutes.includes(nextUrl.pathname)
     const isAuthRoute = authRoutes.includes(nextUrl.pathname)
-
-    /** Skip auth middleware for api routes */
-    if (isApiAuthRoute) return
+    const isPublicRouteMatch = isPublicRoute(req)
 
     if (isAuthRoute) {
         if (isSignedIn) {
@@ -37,7 +32,7 @@ export default auth((req) => {
     }
 
     /** Redirect to authenticated entry path if signed in & path is public route */
-    if (!isSignedIn && !isPublicRoute) {
+    if (!isSignedIn && !isPublicRouteMatch) {
         let callbackUrl = nextUrl.pathname
         if (nextUrl.search) {
             callbackUrl += nextUrl.search
@@ -51,16 +46,7 @@ export default auth((req) => {
         )
     }
 
-    /** Uncomment this and `import { protectedRoutes } from '@/configs/routes.config'` if you want to enable role based access */
-    // if (isSignedIn && nextUrl.pathname !== '/access-denied') {
-    //     const routeMeta = protectedRoutes[nextUrl.pathname]
-    //     const includedRole = routeMeta?.authority.some((role) => req.auth?.user?.authority.includes(role))
-    //     if (!includedRole) {
-    //         return Response.redirect(
-    //             new URL('/access-denied', nextUrl),
-    //         )
-    //     }
-    // }
+    /** Future: Role-based access control can be implemented here using Clerk's user metadata */
 })
 
 export const config = {
