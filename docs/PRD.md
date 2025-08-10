@@ -1,6 +1,6 @@
 # **Eye Shots Platform Product Requirements Document (PRD)**
 
-### **Goals and Background Context**
+## **Goals and Background Context**
 
 **Goals:**
 
@@ -16,9 +16,9 @@ Change Log:
 |------------|---------|--------------------------|--------|  
 | 2025-08-09 | 1.0 | Initial Draft of PRD | John (PM) |
 
-### **Requirements**
+## **Requirements**
 
-#### **Functional**
+### **Functional**
 
 * **FR1:** The system shall support two main user roles: Internal Team Members and Clients, with distinct permissions.  
 * **FR2:** Internal Team Members shall be able to create and manage projects of two types: "One-Time" and "Recurring".  
@@ -31,30 +31,30 @@ Change Log:
 * **FR9:** The system shall be able to generate basic invoices associated with projects.  
 * **FR10:** Clients shall be able to view their project dashboards and invoices through a dedicated client portal.
 
-#### **Non-Functional**
+### **Non-Functional**
 
 * **NFR1:** The platform shall be built using the Ecme Next.js TypeScript starter template.  
 * **NFR2:** All user interfaces must be responsive and function correctly on modern web browsers on desktop and mobile devices.  
 * **NFR3:** The application will leverage the Ecme template's built-in components and styling (Tailwind CSS) to ensure a consistent look and feel.
 
-### **User Interface Design Goals**
+## **User Interface Design Goals**
 
 The UI will adhere to the clean, modern aesthetic of the Ecme template. The primary goal is to create an intuitive and efficient user experience, especially within the Asset Review module. The design should prioritize clarity, with a logical information hierarchy that allows users to quickly find projects, files, and review statuses. Progressive disclosure will be used to avoid overwhelming users, showing detailed controls only when needed.
 
-### **Technical Assumptions**
+## **Technical Assumptions**
 
 * **Repository Structure:** A monorepo structure is assumed, as it is a common pattern for full-stack Next.js applications and is well-supported by modern tooling.  
 * **Service Architecture:** The application will start as a monolith, leveraging Next.js API routes for the backend. This is the simplest approach for the MVP and aligns with the Ecme template's structure.  
 * **Testing Requirements:** Development will include unit and integration tests. The focus will be on ensuring the reliability of the core Asset Review and file management functionalities.
 
-### **Epic List**
+## **Epic List**
 
 * **Epic 1: Foundational Setup & Core User Management:** Establish the project foundation using the Ecme template, set up authentication, and manage user roles.  
 * **Epic 2: Core Project & File Management:** Implement the ability to create projects and manage the associated file/folder structure and permissions.  
 * **Epic 3: Asset Review & Approval System:** Build the core multi-stage review system for creative assets.  
 * **Epic 4: Basic Invoicing & Client Portal Integration:** Develop basic invoicing functionality and ensure all client-facing features are accessible through the portal.
 
-### **Epic 1: Foundational Setup & Core User Management**
+## **Epic 1: Foundational Setup & Core User Management**
 
 **Goal:** To set up the initial application infrastructure based on the Ecme template and implement a robust user and role management system.
 
@@ -86,7 +86,7 @@ The UI will adhere to the clean, modern aesthetic of the Ecme template. The prim
     2. An admin interface exists to view and change a user's role.  
     3. The application's routing (protectedRoutes) respects the assigned roles, blocking access to unauthorized pages.
 
-### **Epic 2: Core Project & File Management**
+## **Epic 2: Core Project & File Management**
 
 **Goal:** To enable the creation and management of projects and their associated file structures, providing the basic organizational layer for all collaborative work.
 
@@ -119,7 +119,7 @@ The UI will adhere to the clean, modern aesthetic of the Ecme template. The prim
     5. Only Admins and Project Managers can rename or delete files and folders.  
     6. Only Admins and Project Managers can change the visibility of a file/folder (e.g., internal only, client visible).
 
-### **Epic 3: Asset Review & Approval System**
+## **Epic 3: Asset Review & Approval System**
 
 **Goal:** To build the platform's core feature: a powerful, multi-stage system for reviewing creative assets that streamlines feedback and accelerates approvals.
 
@@ -159,7 +159,7 @@ The UI will adhere to the clean, modern aesthetic of the Ecme template. The prim
     3. A "Start Review" button appears for the asset under the next reviewer group's column.  
     4. A clear visual history shows all previous versions and their associated feedback.
 
-### **Epic 4: Basic Invoicing & Client Portal Integration**
+## **Epic 4: Basic Invoicing & Client Portal Integration**
 
 **Goal:** To provide essential invoicing capabilities and ensure a seamless, integrated experience for clients accessing the platform.
 

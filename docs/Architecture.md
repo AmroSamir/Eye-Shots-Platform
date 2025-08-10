@@ -1,6 +1,6 @@
 # **Eye Shots Platform Architecture Document**
 
-### **Introduction**
+## **Introduction**
 
 This document outlines the final project architecture for the Eye Shots Platform MVP. It is based on the detailed requirements in the PRD and the specific technical foundation provided by the **Ecme Next.js TypeScript starter template**. This architecture integrates the Ecme template with a modern, hybrid stack consisting of **Convex Cloud**, **Clerk**, and self-hosted services on a **Contabo VPS**.  
 **Starter Template:** The project will be initialized using the **Ecme Next.js TypeScript "starter" version**. This architecture is designed to adapt and extend that foundation.  
@@ -12,7 +12,7 @@ Change Log:
 | 2025-08-09 | 2.0 | Major architectural pivot to Convex, Clerk, & Contabo VPS | Winston (Architect) |  
 | 2025-08-09 | 1.0 | Initial Architecture Draft | Winston (Architect) |
 
-### **High-Level Architecture**
+## **High-Level Architecture**
 
 Technical Summary:  
 The Eye Shots Platform will be a full-stack application with a decoupled architecture. The frontend will be the Ecme Next.js template application, hosted on a Contabo VPS. The backend logic and database will be managed by Convex Cloud, providing real-time data synchronization. User authentication and subscription management will be handled by Clerk. For cost-effective file storage, a custom, secure file-serving API will be developed and hosted on the Contabo VPS, managing assets stored on the server's local storage. This hybrid architecture balances the power of managed backend services with the control and cost benefits of self-hosted infrastructure.  
@@ -45,7 +45,7 @@ graph TD
 * **Backend as a Service (BaaS):** Leveraging Convex for the database and server functions abstracts away much of the backend infrastructure management.  
 * **Self-Hosted Service:** A dedicated, simple API service (e.g., using Express.js) will be created on the VPS to handle file uploads, downloads, and permission checks, providing a secure interface to the local file system.
 
-### **Tech Stack**
+## **Tech Stack**
 
 This is the definitive technology selection for the MVP.
 
@@ -62,7 +62,7 @@ This is the definitive technology selection for the MVP.
 | **API Client** | Convex Client SDK / Axios | Latest | Convex SDK for backend data; Axios (from template) for the self-hosted file API. |
 | **Testing** | Jest & React Testing Library | Latest | Standard for unit and integration testing of React components. |
 
-### **Database Schema (Convex)**
+## **Database Schema (Convex)**
 
 Schemas will be defined in the /convex/schema.ts file, which will be added to the root of the Ecme project structure.  
 // /convex/schema.ts  
@@ -92,7 +92,7 @@ export default defineSchema({
   // ... other tables for versions, reviews, invoices etc.  
 });
 
-### **Source Tree**
+## **Source Tree**
 
 This structure adapts the **Ecme starter template** to include Convex, Clerk, and the self-hosted file API.  
 /  
@@ -119,7 +119,7 @@ This structure adapts the **Ecme starter template** to include Convex, Clerk, an
 ├── .env.local                \# Environment variables for Next.js, Clerk, Convex  
 └── ...                       \# Other Ecme template root files
 
-### **Infrastructure and Deployment**
+## **Infrastructure and Deployment**
 
 * **Infrastructure as Code:** Not applicable. The Contabo VPS will be managed manually. Convex and Clerk are managed via their dashboards.  
 * **Deployment Strategy:**  
@@ -133,7 +133,7 @@ This structure adapts the **Ecme starter template** to include Convex, Clerk, an
   * **Production:** The live setup on the Contabo VPS.  
   * **Development:** localhost for the Next.js app, connected to a dev deployment of Convex.
 
-### **DevOps & Maintenance (Self-Hosting on Contabo VPS)**
+## **DevOps & Maintenance (Self-Hosting on Contabo VPS)**
 
 This section addresses the risks associated with self-hosting and outlines the required responsibilities.
 
