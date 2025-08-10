@@ -1,7 +1,7 @@
-import Landing from './components/Landing'
+import { redirect } from 'next/navigation'
 
 const Page = () => {
-    return <Landing />
+    redirect('/')
 }
 
 export default Page

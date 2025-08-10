@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { TbMenu2 } from 'react-icons/tb'
 import Link from 'next/link'
 import type { Mode } from '@/@types/theme'
+import { SignInButton, UserButton, useUser } from '@clerk/nextjs'
 
 type NavigationProps = {
     toggleMode: () => void
@@ -39,6 +40,7 @@ const navMenu = [
 
 const Navigation = ({ toggleMode, mode }: NavigationProps) => {
     const { isSticky } = useScrollTop()
+    const { isSignedIn } = useUser()
 
     const [isOpen, setIsOpen] = useState(false)
 
@@ -69,6 +71,7 @@ const Navigation = ({ toggleMode, mode }: NavigationProps) => {
                 <button
                     onClick={openDrawer}
                     className="flex lg:hidden items-center gap-4"
+                    aria-label="Open navigation menu"
                 >
                     <TbMenu2 size={24} />
                 </button>
@@ -105,10 +108,11 @@ const Navigation = ({ toggleMode, mode }: NavigationProps) => {
                 <div className="lg:flex flex-row flex-1 absolute inset-0 hidden items-center justify-center text-sm text-zinc-600 font-medium hover:text-zinc-800 transition duration-200 [perspective:1000px] overflow-auto sm:overflow-visible no-visible-scrollbar">
                     <NavList tabs={navMenu} />
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 relative z-[70]">
                     <button
                         className="relative flex cursor-pointer items-center justify-center rounded-xl p-2 text-neutral-500 hover:shadow-input dark:text-neutral-500"
                         onClick={toggleMode}
+                        aria-label="Toggle theme"
                     >
                         <svg
                             className="lucide lucide-sun rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
@@ -148,14 +152,27 @@ const Navigation = ({ toggleMode, mode }: NavigationProps) => {
                         </svg>
                         <span className="sr-only">Toggle theme</span>
                     </button>
-                    <div className="border border-gray-200 dark:border-gray-700 rounded-full inline-flex items-center justify-center gap-2 py-1 px-2 bg-white dark:bg-gray-800">
+                    {/* <div className="border border-gray-200 dark:border-gray-700 rounded-full inline-flex items-center justify-center gap-2 py-1 px-2 bg-white dark:bg-gray-800">
                         <img
                             src="/img/landing/tech/nextjs.png"
                             alt="nextjs"
                             className="w-6 h-6"
                         />
                         <span className="heading-text">Next</span>
-                    </div>
+                    </div> */}
+                    {isSignedIn ? (
+                        <UserButton 
+                            appearance={{
+                                elements: {
+                                    avatarBox: "w-8 h-8"
+                                }
+                            }}
+                        />
+                    ) : (
+                        <SignInButton mode="modal" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors text-sm">
+                            Sign In
+                        </SignInButton>
+                    )}
                 </div>
             </div>
         </div>

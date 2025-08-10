@@ -33,8 +33,8 @@ const othersNavigationConfig: NavigationTree[] = [
             },
             {
                 key: 'others.landing',
-                path: `/landing`,
-                title: 'Landing',
+                path: `/`,
+                title: 'Home',
                 translateKey: 'nav.others.landing',
                 icon: 'landing',
                 type: NAV_ITEM_TYPE_ITEM,
@@ -42,7 +42,7 @@ const othersNavigationConfig: NavigationTree[] = [
                 meta: {
                     description: {
                         translateKey: 'nav.others.landingDesc',
-                        label: 'Shared component usage',
+                        label: 'Home page and landing',
                     },
                 },
                 subMenu: [],
